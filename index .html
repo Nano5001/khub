@@ -2,613 +2,604 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khlilhub — 18+ Verification Required</title>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Khlilhub · 18+ Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #1b1b1b;
-      --bg2: #242424;
-      --bg3: #2e2e2e;
-      --orange: #ff9000;
-      --orange2: #e07800;
-      --orange-glow: rgba(255,144,0,0.25);
-      --white: #ffffff;
-      --gray: #aaaaaa;
-      --light-gray: #777;
-      --border: #3a3a3a;
-      --danger: #e53e3e;
-      --ff: 'Exo 2', Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-dark: #0b0b0d;
+      --bg-panel: #15161a;
+      --bg-input: #1e1f24;
+      --border: #2a2b30;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b3be;
+      --text-muted: #6b6e7a;
+      --accent: #e65c00;
+      --accent-hover: #ff701f;
+      --accent-soft: rgba(230, 92, 0, 0.15);
+      --danger: #dc3545;
+      --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    }
 
     body {
-      font-family: var(--ff);
-      background: var(--bg);
-      color: var(--white);
-      min-height: 100vh;
+      background: var(--bg-dark);
+      font-family: var(--font-main);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
       overflow: hidden;
+      height: 100vh;
     }
 
-    /* ===== OVERLAY ===== */
+    /* OVERLAY – dark realistic backdrop */
     #overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(8, 8, 10, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(6px);
+      padding: 1.5rem;
     }
 
-    /* ===== POPUP BOX ===== */
+    /* POPUP PANEL – clean, modern, minimalistic */
     .popup {
       display: none;
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       flex-direction: column;
       align-items: center;
-      background: var(--bg2);
-      border: 2px solid var(--orange);
-      border-radius: 12px;
-      padding: 2.5rem 2.8rem;
-      max-width: 480px;
-      width: 92%;
       text-align: center;
-      box-shadow: 0 0 60px var(--orange-glow), 0 8px 40px rgba(0,0,0,0.8);
-      animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      transition: all 0.2s ease;
+      animation: fadeScale 0.3s ease;
     }
-    .popup.active { display: flex; }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+    .popup.active {
+      display: flex;
     }
 
-    .popup-logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      user-select: none;
-    }
-    .popup-logo .kh { color: var(--white); }
-    .popup-logo .hub {
-      background: var(--orange);
-      color: #000;
-      padding: 0.05em 0.35em;
-      border-radius: 5px;
-      margin-left: 2px;
+    @keyframes fadeScale {
+      0% { opacity: 0; transform: scale(0.96); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
+    /* Branding – minimal, like a real tech/adult platform */
+    .brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e0e0e0;
+    }
+    .brand span:first-child {
+      font-weight: 800;
+      color: white;
+    }
+    .brand .hub-badge {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 0.1rem 0.6rem;
+      border-radius: 6px;
+      margin-left: 4px;
+      font-weight: 700;
+      font-size: 1.7rem;
+    }
+
+    /* Icon – more abstract, less cartoon */
     .popup-icon {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      animation: bounce 1.5s ease-in-out infinite;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-8px); }
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+      filter: grayscale(0.2);
+      opacity: 0.9;
     }
 
-    .popup-step {
+    .step-badge {
       font-size: 0.7rem;
-      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 0.6rem;
+      letter-spacing: 2px;
       font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.5rem;
     }
 
     .popup h2 {
-      font-size: 1.55rem;
-      font-weight: 900;
-      color: var(--white);
-      margin-bottom: 0.85rem;
-      line-height: 1.25;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: white;
+      letter-spacing: -0.3px;
     }
 
     .popup p {
-      font-size: 0.88rem;
-      color: var(--gray);
-      line-height: 1.7;
-      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.2rem;
+      line-height: 1.6;
+      font-weight: 400;
     }
 
-    .popup-btns {
+    .button-group {
       display: flex;
       gap: 1rem;
       width: 100%;
+      margin-bottom: 1.8rem;
     }
 
-    .btn-yes {
+    .btn {
       flex: 1;
-      padding: 0.9rem;
-      background: var(--orange);
-      color: #000;
-      font-family: var(--ff);
-      font-size: 0.95rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      letter-spacing: 0.02em;
-    }
-    .btn-yes:hover { background: var(--orange2); transform: scale(1.03); }
-    .btn-yes:active { transform: scale(0.98); }
-
-    .btn-no {
-      flex: 1;
-      padding: 0.9rem;
-      background: transparent;
-      color: var(--gray);
-      font-family: var(--ff);
-      font-size: 0.88rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
       font-weight: 600;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
+      font-size: 0.9rem;
+      border: none;
       cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.2s;
+      font-family: var(--font-main);
+      letter-spacing: 0.2px;
     }
-    .btn-no:hover { border-color: var(--danger); color: var(--danger); }
 
-    .popup-progress {
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      box-shadow: 0 4px 12px rgba(230, 92, 0, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-ghost:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: rgba(220, 53, 69, 0.05);
+    }
+
+    .progress-dots {
       display: flex;
-      gap: 6px;
-      margin-top: 1.5rem;
+      gap: 10px;
+      margin-top: 0.5rem;
     }
     .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: background 0.3s;
+      width: 8px;
+      height: 8px;
+      border-radius: 10px;
+      background: #2e303a;
+      transition: 0.2s;
     }
-    .dot.done { background: var(--orange); }
+    .dot.filled {
+      background: var(--accent);
+      width: 20px;
+    }
 
-    /* ===== MAIN PAGE (empty styled) ===== */
+    /* MAIN PAGE STYLES - Realistic adult platform look */
     #main-page {
       display: none;
-      min-height: 100vh;
       flex-direction: column;
+      min-height: 100vh;
+      background: var(--bg-dark);
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     /* Header */
     .site-header {
-      background: #000;
-      border-bottom: 3px solid var(--orange);
+      background: #0d0e12;
+      border-bottom: 1px solid #1f2128;
       padding: 0 2rem;
-      height: 58px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      backdrop-filter: blur(8px);
     }
-    .site-logo {
-      font-size: 1.6rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      user-select: none;
-    }
-    .site-logo .kh { color: var(--white); }
-    .site-logo .hub {
-      background: var(--orange);
-      color: #000;
-      padding: 0.05em 0.4em;
-      border-radius: 5px;
-      margin-left: 3px;
-    }
-    .header-right {
+    .logo-area {
       display: flex;
-      gap: 0.75rem;
       align-items: center;
+      gap: 0.3rem;
+      font-weight: 800;
+      font-size: 1.7rem;
+      letter-spacing: -0.5px;
     }
-    .hbtn {
-      padding: 0.45rem 1.1rem;
+    .logo-area .kh {
+      color: white;
+    }
+    .logo-area .hub-badge {
+      background: var(--accent);
+      color: black;
+      padding: 0.05rem 0.5rem;
       border-radius: 5px;
-      font-family: var(--ff);
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      letter-spacing: 0.03em;
     }
-    .hbtn-login { background: var(--bg3); color: var(--white); border: 1px solid var(--border); }
-    .hbtn-join  { background: var(--orange); color: #000; }
+    .header-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .btn-sm {
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #1e1f26;
+      border: 1px solid #2d2f38;
+      color: #ccc;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-sm.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
 
-    /* Nav bar */
-    .site-nav {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
+    /* Navigation */
+    .nav-bar {
+      background: #111217;
+      border-bottom: 1px solid #1f2128;
       padding: 0 2rem;
       display: flex;
       gap: 2rem;
-      height: 44px;
+      height: 46px;
       align-items: center;
       overflow-x: auto;
-    }
-    .site-nav a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 600;
       white-space: nowrap;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
     }
-    .site-nav a:hover, .site-nav a.active { color: var(--orange); }
+    .nav-link {
+      color: #8a8d98;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+    }
+    .nav-link.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 12px;
+      margin-bottom: -12px;
+    }
 
-    /* Search bar */
-    .search-bar-wrap {
-      background: var(--bg);
-      padding: 1.25rem 2rem;
+    /* Search */
+    .search-section {
+      background: #0d0e12;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: center;
     }
-    .search-bar {
+    .search-box {
       display: flex;
+      max-width: 650px;
       width: 100%;
-      max-width: 700px;
     }
-    .search-bar input {
+    .search-box input {
       flex: 1;
-      padding: 0.75rem 1.25rem;
-      background: var(--bg3);
-      border: 1px solid var(--border);
+      background: #1a1b21;
+      border: 1px solid #2a2c35;
       border-right: none;
-      border-radius: 6px 0 0 6px;
-      color: var(--white);
-      font-family: var(--ff);
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px 0 0 10px;
+      color: white;
       font-size: 0.9rem;
       outline: none;
     }
-    .search-bar input::placeholder { color: var(--light-gray); }
-    .search-bar button {
-      padding: 0.75rem 1.5rem;
-      background: var(--orange);
-      color: #000;
-      border: none;
-      border-radius: 0 6px 6px 0;
-      font-weight: 700;
-      font-size: 1rem;
+    .search-box input::placeholder {
+      color: #5b5e6b;
+    }
+    .search-box button {
+      background: #23252e;
+      border: 1px solid #2a2c35;
+      border-left: none;
+      padding: 0 1.4rem;
+      border-radius: 0 10px 10px 0;
+      color: #aaa;
+      font-size: 1.1rem;
       cursor: pointer;
     }
 
-    /* Empty content area */
-    .content-area {
+    /* Content area - realistic empty state */
+    .content-grid {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
       text-align: center;
     }
-    .content-area h1 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 900;
-      color: var(--white);
+    .content-grid h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
     }
-    .content-area h1 span { color: var(--orange); }
-    .content-area p {
-      color: var(--light-gray);
-      font-size: 0.9rem;
-      margin-bottom: 2.5rem;
+    .content-grid h1 span {
+      color: var(--accent);
     }
-
-    /* THE BUTTON */
-    .btn-continue {
-      padding: 1.1rem 3rem;
-      background: var(--orange);
-      color: #000;
-      font-family: var(--ff);
-      font-size: 1.1rem;
-      font-weight: 900;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      box-shadow: 0 0 30px var(--orange-glow);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      animation: pulseBtn 2s ease-in-out infinite;
+    .subtitle {
+      color: #7f8290;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
     }
-    .btn-continue:hover {
-      background: var(--orange2);
-      transform: scale(1.05);
-      box-shadow: 0 0 50px var(--orange-glow);
-      animation: none;
-    }
-    @keyframes pulseBtn {
-      0%,100% { box-shadow: 0 0 30px var(--orange-glow); }
-      50%      { box-shadow: 0 0 60px rgba(255,144,0,0.5); }
-    }
-
-    /* Fake category pills */
-    .fake-cats {
+    .tag-cloud {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       justify-content: center;
       margin-bottom: 2.5rem;
-      max-width: 600px;
+      max-width: 550px;
     }
-    .cat-pill {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--gray);
-      padding: 0.35rem 0.9rem;
-      border-radius: 100px;
+    .tag {
+      background: #1a1c23;
+      border: 1px solid #2a2c35;
+      color: #9a9daa;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
       font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      cursor: default;
+      font-weight: 500;
+    }
+    .cta-button {
+      background: var(--accent);
+      color: black;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2.8rem;
+      border: none;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(230, 92, 0, 0.3);
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cta-button:hover {
+      background: #ff751a;
+      transform: scale(1.02);
     }
 
-    /* ===== IMAGE MODAL ===== */
+    /* Footer */
+    .site-footer {
+      background: #0a0a0e;
+      border-top: 1px solid #1f2128;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #5b5e6b;
+      letter-spacing: 0.5px;
+    }
+
+    /* Image modal */
     #img-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(10px);
       z-index: 99999;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      backdrop-filter: blur(8px);
     }
-    #img-modal.open { display: flex; }
+    #img-modal.open {
+      display: flex;
+    }
     #img-modal img {
-      max-width: 88vw;
-      max-height: 80vh;
-      border-radius: 10px;
-      border: 3px solid var(--orange);
-      box-shadow: 0 0 80px var(--orange-glow);
-      animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      max-width: 90vw;
+      max-height: 75vh;
+      border-radius: 16px;
+      border: 1px solid #3a3a44;
+      box-shadow: 0 0 60px rgba(230,92,0,0.2);
       object-fit: contain;
     }
-    .modal-close {
-      margin-top: 1.25rem;
-      padding: 0.6rem 2rem;
-      background: var(--orange);
-      color: #000;
-      font-family: var(--ff);
-      font-weight: 700;
-      font-size: 0.9rem;
+    .close-modal {
+      margin-top: 1.5rem;
+      background: #2a2a33;
       border: none;
-      border-radius: 6px;
+      color: white;
+      padding: 0.7rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
       cursor: pointer;
-      letter-spacing: 0.05em;
-    }
-    .modal-close:hover { background: var(--orange2); }
-
-    /* Footer */
-    .site-footer {
-      background: #000;
-      border-top: 1px solid var(--border);
-      padding: 1rem 2rem;
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--light-gray);
-      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
-
-<!-- ============ OVERLAY WITH 5 POPUPS ============ -->
-<div id="overlay">
-
-  <!-- POPUP 1 -->
-  <div class="popup active" id="p1">
-    <div class="popup-logo"><span class="kh">Khlil</span><span class="hub">hub</span></div>
-    <div class="popup-icon">🔞</div>
-    <div class="popup-step">Step 1 of 5 · Age Verification</div>
-    <h2>Are you 18 years of age or older?</h2>
-    <p>This website contains content strictly intended for adults. You must confirm that you are at least 18 years old to proceed. Minors are absolutely not permitted beyond this point.</p>
-    <div class="popup-btns">
-      <button class="btn-yes" onclick="next(1)">Yes, I am 18+</button>
-      <button class="btn-no" onclick="leave()">No, take me away</button>
+  <!-- OVERLAY WITH VERIFICATION STEPS -->
+  <div id="overlay">
+    <!-- Step 1 -->
+    <div class="popup active" id="p1">
+      <div class="brand"><span>Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="popup-icon">🔞</div>
+      <div class="step-badge">STEP 1 OF 5 · AGE CHECK</div>
+      <h2>Are you 18 or older?</h2>
+      <p>This site contains adult material. You must be at least 18 years old. No minors allowed.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="next(1)">Yes, I am 18+</button>
+        <button class="btn btn-ghost" onclick="leave()">Exit</button>
+      </div>
+      <div class="progress-dots">
+        <div class="dot filled" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div><div class="dot" id="d4"></div><div class="dot" id="d5"></div>
+      </div>
     </div>
-    <div class="popup-progress">
-      <div class="dot done" id="d1"></div>
-      <div class="dot" id="d2"></div>
-      <div class="dot" id="d3"></div>
-      <div class="dot" id="d4"></div>
-      <div class="dot" id="d5"></div>
+    <!-- Step 2 -->
+    <div class="popup" id="p2">
+      <div class="brand"><span>Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="popup-icon">⚠️</div>
+      <div class="step-badge">STEP 2 OF 5 · CONFIRMATION</div>
+      <h2>Are you absolutely sure?</h2>
+      <p>Double-checking: you confirm you are a legal adult and not a minor?</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="next(2)">I'm certain</button>
+        <button class="btn btn-ghost" onclick="leave()">Maybe not</button>
+      </div>
+      <div class="progress-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot" id="d3"></div><div class="dot" id="d4"></div><div class="dot" id="d5"></div>
+      </div>
     </div>
-  </div>
-
-  <!-- POPUP 2 -->
-  <div class="popup" id="p2">
-    <div class="popup-logo"><span class="kh">Khlil</span><span class="hub">hub</span></div>
-    <div class="popup-icon">🤔</div>
-    <div class="popup-step">Step 2 of 5 · Confirmation</div>
-    <h2>Are you absolutely sure?</h2>
-    <p>We just want to double-check. Are you genuinely, truly, 100% certain that you are an adult human being of legal age? Think carefully before you answer.</p>
-    <div class="popup-btns">
-      <button class="btn-yes" onclick="next(2)">Yes, I'm sure</button>
-      <button class="btn-no" onclick="leave()">Actually… maybe not</button>
+    <!-- Step 3 -->
+    <div class="popup" id="p3">
+      <div class="brand"><span>Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="popup-icon">🛡️</div>
+      <div class="step-badge">STEP 3 OF 5 · CHILD SAFETY</div>
+      <h2>Not for children</h2>
+      <p>This platform is strictly for adults. Are you a child or under 18?</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="next(3)">I am NOT a child</button>
+        <button class="btn btn-ghost" onclick="leave()">I am under 18</button>
+      </div>
+      <div class="progress-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot" id="d4"></div><div class="dot" id="d5"></div>
+      </div>
     </div>
-    <div class="popup-progress">
-      <div class="dot done"></div>
-      <div class="dot done" id="d2"></div>
-      <div class="dot" id="d3"></div>
-      <div class="dot" id="d4"></div>
-      <div class="dot" id="d5"></div>
+    <!-- Step 4 -->
+    <div class="popup" id="p4">
+      <div class="brand"><span>Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="popup-icon">👤</div>
+      <div class="step-badge">STEP 4 OF 5 · PRIVACY CHECK</div>
+      <h2>Is anyone watching?</h2>
+      <p>Ensure no parent, guardian, or minor is observing your screen right now.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="next(4)">Coast is clear</button>
+        <button class="btn btn-ghost" onclick="leave()">Someone's behind me</button>
+      </div>
+      <div class="progress-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot" id="d5"></div>
+      </div>
     </div>
-  </div>
-
-  <!-- POPUP 3 -->
-  <div class="popup" id="p3">
-    <div class="popup-logo"><span class="kh">Khlil</span><span class="hub">hub</span></div>
-    <div class="popup-icon">🧒</div>
-    <div class="popup-step">Step 3 of 5 · Child Safety Check</div>
-    <h2>This content is NOT for children.</h2>
-    <p>Just to be crystal clear: if you are a child, a minor, a small person under the age of 18, or someone who still gets tucked in at night — this website is not for you. Are you a child?</p>
-    <div class="popup-btns">
-      <button class="btn-yes" onclick="next(3)">I am NOT a child</button>
-      <button class="btn-no" onclick="leave()">I am a child 🍼</button>
-    </div>
-    <div class="popup-progress">
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot" id="d4"></div>
-      <div class="dot" id="d5"></div>
-    </div>
-  </div>
-
-  <!-- POPUP 4 -->
-  <div class="popup" id="p4">
-    <div class="popup-logo"><span class="kh">Khlil</span><span class="hub">hub</span></div>
-    <div class="popup-icon">👀</div>
-    <div class="popup-step">Step 4 of 5 · Parental Status</div>
-    <h2>Is your mum watching over your shoulder right now?</h2>
-    <p>Before you proceed, please take a moment to physically look behind you and check that no parent, guardian, teacher, or nosy sibling is watching your screen. Did you check?</p>
-    <div class="popup-btns">
-      <button class="btn-yes" onclick="next(4)">I checked. Coast is clear. ✅</button>
-      <button class="btn-no" onclick="leave()">Mum is literally right here 😰</button>
-    </div>
-    <div class="popup-progress">
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot" id="d5"></div>
+    <!-- Step 5 -->
+    <div class="popup" id="p5">
+      <div class="brand"><span>Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="popup-icon">📄</div>
+      <div class="step-badge">STEP 5 OF 5 · LEGAL</div>
+      <h2>Final agreement</h2>
+      <p>By entering, you swear you are a legal adult in your jurisdiction.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="enterSite()">I agree & enter</button>
+        <button class="btn btn-ghost" onclick="leave()">Decline</button>
+      </div>
+      <div class="progress-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+      </div>
     </div>
   </div>
 
-  <!-- POPUP 5 -->
-  <div class="popup" id="p5">
-    <div class="popup-logo"><span class="kh">Khlil</span><span class="hub">hub</span></div>
-    <div class="popup-icon">⚖️</div>
-    <div class="popup-step">Step 5 of 5 · Final Legal Confirmation</div>
-    <h2>Last one, we promise.</h2>
-    <p>By clicking "Enter", you solemnly swear on your collection of childhood action figures that you are a fully grown, tax-paying, responsible adult who is legally permitted to view this website in your jurisdiction. Do you swear?</p>
-    <div class="popup-btns">
-      <button class="btn-yes" onclick="enter()">I solemnly swear. ENTER →</button>
-      <button class="btn-no" onclick="leave()">I cannot swear on the action figures</button>
+  <!-- MAIN WEBSITE (fake adult platform look) -->
+  <div id="main-page">
+    <header class="site-header">
+      <div class="logo-area"><span class="kh">Khlil</span><span class="hub-badge">hub</span></div>
+      <div class="header-actions">
+        <button class="btn-sm">Log In</button>
+        <button class="btn-sm primary">Join Free</button>
+      </div>
+    </header>
+    <nav class="nav-bar">
+      <a href="#" class="nav-link active">Home</a>
+      <a href="#" class="nav-link">Videos</a>
+      <a href="#" class="nav-link">Categories</a>
+      <a href="#" class="nav-link">Trending</a>
+      <a href="#" class="nav-link">Premium</a>
+      <a href="#" class="nav-link">Live</a>
+      <a href="#" class="nav-link">Community</a>
+    </nav>
+    <div class="search-section">
+      <div class="search-box">
+        <input type="search" placeholder="Search videos..." />
+        <button>🔍</button>
+      </div>
     </div>
-    <div class="popup-progress">
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-      <div class="dot done"></div>
-    </div>
+    <main class="content-grid">
+      <h1>Welcome to <span>Khlilhub</span></h1>
+      <p class="subtitle">Exclusive adult content. You passed verification.</p>
+      <div class="tag-cloud">
+        <span class="tag">Trending</span><span class="tag">Featured</span>
+        <span class="tag">New</span><span class="tag">Top Rated</span>
+        <span class="tag">HD</span><span class="tag">VR</span>
+        <span class="tag">Amateur</span><span class="tag">Professional</span>
+      </div>
+      <button class="cta-button" onclick="showImage()">▶ Continue to Featured Content</button>
+    </main>
+    <footer class="site-footer">
+      © 2025 Khlilhub · 18+ Only · All models 18+ · Fantasy
+    </footer>
   </div>
 
-</div>
-
-<!-- ============ MAIN PAGE ============ -->
-<div id="main-page">
-
-  <!-- Header -->
-  <header class="site-header">
-    <a class="site-logo" href="#"><span class="kh">Khlil</span><span class="hub">hub</span></a>
-    <div class="header-right">
-      <button class="hbtn hbtn-login">Log In</button>
-      <button class="hbtn hbtn-join">Join Free</button>
-    </div>
-  </header>
-
-  <!-- Nav -->
-  <nav class="site-nav">
-    <a href="#" class="active">Home</a>
-    <a href="#">Videos</a>
-    <a href="#">Categories</a>
-    <a href="#">Popular</a>
-    <a href="#">New</a>
-    <a href="#">Top Rated</a>
-    <a href="#">Live</a>
-    <a href="#">Community</a>
-  </nav>
-
-  <!-- Search -->
-  <div class="search-bar-wrap">
-    <div class="search-bar">
-      <input type="text" placeholder="Search Khlilhub..." />
-      <button>🔍</button>
-    </div>
+  <!-- IMAGE MODAL (hidden prank) -->
+  <div id="img-modal">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2322242b'/%3E%3Ctext x='200' y='140' font-size='22' font-family='Inter,sans-serif' fill='%23b0b3be' text-anchor='middle'%3E😂 You actually clicked!%3C/text%3E%3Ctext x='200' y='180' font-size='16' fill='%236b6e7a' text-anchor='middle'%3EThis is a prank. No adult content.%3C/text%3E%3C/svg%3E" alt="Prank reveal" />
+    <button class="close-modal" onclick="closeImg()">Close</button>
   </div>
 
-  <!-- Empty Content with Button -->
-  <main class="content-area">
-    <h1>Welcome to <span>Khlilhub</span></h1>
-    <p>The world's most exclusive content platform. You made it through all 5 checkpoints. Impressive.</p>
+  <script>
+    let currentStep = 1;
 
-    <div class="fake-cats">
-      <span class="cat-pill">🔥 Trending</span>
-      <span class="cat-pill">⭐ Featured</span>
-      <span class="cat-pill">🎬 New Uploads</span>
-      <span class="cat-pill">🏆 Top Rated</span>
-      <span class="cat-pill">💎 Premium</span>
-      <span class="cat-pill">🌍 International</span>
-      <span class="cat-pill">🎭 Drama</span>
-      <span class="cat-pill">📺 Series</span>
-    </div>
+    function next(step) {
+      document.getElementById('p' + step).classList.remove('active');
+      currentStep = step + 1;
+      document.getElementById('p' + currentStep).classList.add('active');
+      // update dots if needed (visual already set via static ids, but dynamic update for safety)
+      for (let i = 1; i <= 5; i++) {
+        const dot = document.getElementById('d' + i);
+        if (dot && i <= currentStep) dot.classList.add('filled');
+      }
+    }
 
-    <button class="btn-continue" onclick="showImage()">
-      🎬 &nbsp; Continue to Featured Content
-    </button>
-  </main>
+    function enterSite() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('main-page').style.display = 'flex';
+      document.body.style.overflow = 'auto';
+    }
 
-  <footer class="site-footer">
-    © 2024 Khlilhub™ · All rights reserved · 18+ Only · For entertainment purposes only
-  </footer>
+    function leave() {
+      document.body.innerHTML = `
+        <div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0b0b0d;color:white;font-family:'Inter',sans-serif;text-align:center;padding:2rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">🚫</div>
+          <h2 style="color:#e65c00;font-weight:700;">Access Denied</h2>
+          <p style="color:#aaa;margin:1rem 0 2rem;">You have been redirected. Responsible choice.</p>
+          <button onclick="location.reload()" style="background:#e65c00;border:none;color:black;font-weight:700;padding:0.8rem 2rem;border-radius:30px;cursor:pointer;">Go back</button>
+        </div>
+      `;
+    }
 
-</div>
+    function showImage() {
+      document.getElementById('img-modal').classList.add('open');
+    }
 
-<!-- ============ IMAGE MODAL ============ -->
-<div id="img-modal">
-  <img src="person1.jpg" alt="Featured Content" />
-  <button class="modal-close" onclick="closeImg()">✕ Close</button>
-</div>
+    function closeImg() {
+      document.getElementById('img-modal').classList.remove('open');
+    }
 
-<script>
-  let current = 1;
+    document.getElementById('img-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeImg();
+    });
 
-  function next(step) {
-    document.getElementById('p' + step).classList.remove('active');
-    current = step + 1;
-    document.getElementById('p' + current).classList.add('active');
-  }
-
-  function enter() {
-    document.getElementById('overlay').style.display = 'none';
-    const main = document.getElementById('main-page');
-    main.style.display = 'flex';
-    document.body.style.overflow = 'auto';
-  }
-
-  function leave() {
-    document.body.innerHTML = `
-      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1b1b1b;font-family:'Exo 2',Arial,sans-serif;text-align:center;padding:2rem;">
-        <div style="font-size:4rem;margin-bottom:1rem;">🚪</div>
-        <h1 style="color:#ff9000;font-size:2rem;font-weight:900;margin-bottom:0.5rem;">Goodbye!</h1>
-        <p style="color:#aaa;font-size:1rem;margin-bottom:2rem;">You have been safely redirected away from this website.<br/>Well done for being responsible.</p>
-        <button onclick="location.reload()" style="padding:0.8rem 2rem;background:#ff9000;color:#000;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;">
-          Wait… I changed my mind 😅
-        </button>
-      </div>`;
-  }
-
-  function showImage() {
-    document.getElementById('img-modal').classList.add('open');
-  }
-
-  function closeImg() {
-    document.getElementById('img-modal').classList.remove('open');
-  }
-
-  // Close image modal on backdrop click
-  document.getElementById('img-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeImg();
-  });
-</script>
-
+    // Pre-fill dots on load for step 1
+    window.onload = () => {
+      document.getElementById('d1').classList.add('filled');
+    };
+  </script>
 </body>
 </html>
